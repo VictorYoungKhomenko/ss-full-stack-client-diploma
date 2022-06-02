@@ -4,7 +4,7 @@ import { FC } from 'react'
 const Auth: FC = () => {
 	const {} = useAuth()
 
-	return <div />
+	return <div>AUTH</div>
 }
 
 export default Auth

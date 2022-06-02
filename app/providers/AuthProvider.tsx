@@ -22,6 +22,7 @@ interface IContext {
 export const AuthContext = createContext<IContext>({} as IContext)
 
 const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
+	// @ts-ignore
 	const [user, setUser] = useState<TypeUser>(null)
 
 	const { pathname } = useRouter()
@@ -42,6 +43,7 @@ const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
 
 			if (!accessToken && !user) {
 				// AuthService.logout();
+				// @ts-ignore
 				setUser(null)
 			}
 		},
