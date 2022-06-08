@@ -11,8 +11,7 @@ import {
 } from 'react'
 import { useRouter } from 'next/router'
 import { TypeUser } from '@services/auth/auth.helper'
-
-// import {AuthService} from '@services/auth/auth.service'
+import { AuthService } from '@services/auth/auth.service'
 
 interface IContext {
 	user: TypeUser
@@ -22,7 +21,6 @@ interface IContext {
 export const AuthContext = createContext<IContext>({} as IContext)
 
 const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
-	// @ts-ignore
 	const [user, setUser] = useState<TypeUser>(null)
 
 	const { pathname } = useRouter()
@@ -42,8 +40,7 @@ const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
 			const accessToken = Cookies.get('accessToken')
 
 			if (!accessToken && !user) {
-				// AuthService.logout();
-				// @ts-ignore
+				AuthService.logout()
 				setUser(null)
 			}
 		},
@@ -56,3 +53,5 @@ const AuthProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
 		</AuthContext.Provider>
 	)
 }
+
+export default AuthProvider
