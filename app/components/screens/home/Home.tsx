@@ -1,13 +1,16 @@
 import { FC } from 'react'
 import Posts from '@/components/ui/posts/Posts'
 import AddPost from '@/components/ui/posts/AddPost'
+import Layout from '@/components/layout/Layout'
 
 const Home: FC = () => {
 	return (
-		<div>
-			<AddPost />
-			<Posts />
-		</div>
+		<Layout title="Головна">
+			<div>
+				<AddPost />
+				<Posts />
+			</div>
+		</Layout>
 	)
 }
 

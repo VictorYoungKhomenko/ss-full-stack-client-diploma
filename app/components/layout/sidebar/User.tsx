@@ -1,10 +1,10 @@
 import { useAuth } from '@/hooks/useAuth'
 import { FC } from 'react'
 import { Avatar, Button, Card, Col, Row } from 'antd'
-import { users } from '@/components/layout/sidebar/dataUsers'
+import { AuthService } from '@services/auth/auth.service'
 
 const User: FC = () => {
-	const {} = useAuth()
+	const { user, setUser } = useAuth()
 
 	return (
 		<Card style={{
@@ -17,14 +17,16 @@ const User: FC = () => {
 		>
 			<Row>
 				<Col span={6}>
-					<Avatar src={users[0].avatar} />
+					<Avatar src={user?.avatarPath} alt='' />
 				</Col>
 
 				<Col span={18}>
-					<p>{users[0]?.name || 'Без імені'}</p>
+					<p>{user?.name}</p>
 				</Col>
 			</Row>
 			<Button type='dashed' onClick={() => {
+				AuthService.logout()
+				setUser && setUser(null)
 			}}>
 				Вийти
 			</Button>

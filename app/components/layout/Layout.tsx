@@ -3,12 +3,20 @@ import { FC, PropsWithChildren } from 'react'
 import { Col, Row } from 'antd'
 import Header from '@/components/layout/header/Header'
 import Sidebar from '@/components/layout/sidebar/Sidebar'
+import Head from 'next/head'
 
-const Layout: FC<PropsWithChildren<unknown>> = ({ children }) => {
-	const user = useAuth()
+const Layout: FC<PropsWithChildren<{ title: string }>> = ({
+	children,
+	title
+}) => {
+	const { user } = useAuth()
 
 	return (
 		<>
+			<Head>
+				<title>{title} | Students Social</title>
+			</Head>
+
 			<Header />
 
 			<Row gutter={[5, 2]}>
