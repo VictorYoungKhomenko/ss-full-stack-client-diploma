@@ -11,4 +11,5 @@ export interface IUser {
 	gender?: string
 	speciality?: string
 	friends?: IUser[]
+	postCount?: number
 }

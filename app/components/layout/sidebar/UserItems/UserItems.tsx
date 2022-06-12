@@ -1,11 +1,13 @@
 import { FC } from 'react'
 import { useRouter } from 'next/router'
-import { Card, List } from 'antd'
-import { users } from '@/components/layout/sidebar/dataUsers'
+import { Card, List, Skeleton } from 'antd'
+import { useProfile } from '@/hooks/useProfile'
 import UserItem from '@/components/layout/sidebar/UserItems/UserItem'
 
 const UserItems: FC = () => {
 	const { push } = useRouter()
+
+	const { isLoading, data } = useProfile()
 
 	return (
 		<Card
@@ -16,13 +18,13 @@ const UserItems: FC = () => {
 				borderRadius: 3
 			}}
 		>
-			{users.map(user => (
+			{isLoading ? <Skeleton /> : data?.friends?.length ? data?.friends?.map(user => (
 				<UserItem key={user._id} user={user} />
-			))}
+			)) : <div> Друзів не має</div>}
 
 			<List>
-				<List.Item onClick={() => push('/conversations')}>
-					<List.Item.Meta title="Сообщения" />
+				<List.Item onClick={() => push('/conversations')} style={{ cursor: 'pointer' }}>
+					<List.Item.Meta title='Сообщения' />
 				</List.Item>
 			</List>
 		</Card>

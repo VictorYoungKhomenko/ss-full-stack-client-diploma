@@ -1,13 +1,15 @@
 import { FC } from 'react'
-import { initialPosts } from '@/components/screens/home/posts'
-import PostItem from '@/components/ui/posts/PostItem'
+import PostItem from '@/components/ui/posts/post-item/PostItem'
+import { IPost } from '@/types/post.interface'
+import { Alert, Skeleton } from 'antd'
 
-const Posts: FC = () => {
+const Posts: FC<{ posts: IPost[]; isLoading: boolean }> = ({ posts, isLoading }) => {
 	return (
 		<>
-			{initialPosts.map(post => (
-				<PostItem post={post} key={post._id} />
-			))}
+			{
+				isLoading ? <Skeleton /> : posts?.length ? posts.map(post => <PostItem post={post} key={post._id} />) :
+					<Alert message={'Пости не знайдені'} style={{ marginTop: 20 }} />
+			}
 		</>
 	)
 }

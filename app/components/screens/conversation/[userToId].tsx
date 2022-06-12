@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import Layout from '@/components/layout/Layout'
 
-const Conversation: FC = () => {
+const ConversationPage: FC = () => {
 	return (
 		<Layout title="Діалог">
 			<div>Conversation</div>
@@ -9,4 +9,4 @@ const Conversation: FC = () => {
 	)
 }
 
-export default Conversation
+export default ConversationPage
