@@ -1,12 +1,12 @@
 import { FC } from 'react'
 import Link from 'next/link'
 import { Avatar } from 'antd'
-import { IPost } from '@/types/post.interface'
 import { time2TimeAgo } from '../../../../utilities/convertData'
+import { IUser } from '@/types/user.interface'
 
-const UserInfo: FC<{ post: IPost }> = ({ post }) => {
+const UserInfo: FC<{ user: IUser, postDate?: string }> = ({ user, postDate }) => {
 	return (
-		<Link href={`/profile/${post.user._id}`}>
+		<Link href={`/profile/${user._id}`}>
 			<a
 				style={{
 					display: 'flex',
@@ -25,11 +25,14 @@ const UserInfo: FC<{ post: IPost }> = ({ post }) => {
 						height: 50
 					}}
 				>
-					<Avatar size={46} src={post.user?.avatarPath} />
+					<Avatar size={46} src={user?.avatarPath} />
 				</div>
 				<div>
-					<p style={{ fontSize: 14 }}>{post.user.name}</p>
-					<p style={{ fontSize: 14, opacity: '0.6' }}>{time2TimeAgo(post.createdAt)}</p>
+					<p style={{ fontSize: 14 }}>{user.name}</p>
+
+					{
+						postDate && <p style={{ fontSize: 14, opacity: '0.6' }}>{time2TimeAgo(postDate)}</p>
+					}
 				</div>
 			</a>
 		</Link>
