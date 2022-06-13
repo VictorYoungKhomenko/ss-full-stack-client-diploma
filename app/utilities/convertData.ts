@@ -13,7 +13,7 @@ export function time2TimeAgo(date: string) {
 	}
 
 	if (seconds > 3600) {
-		return 'Кілька годин назад'
+		return 'Кілька годин тому'
 	}
 
 	if (seconds > 1800) {

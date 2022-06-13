@@ -7,8 +7,9 @@ import PostActions from '@/components/ui/posts/post-item/post-actions/PostAction
 import { useQuery } from 'react-query'
 import { CommentService } from '@services/comment.service'
 import PostComments from '@/components/ui/posts/post-item/post-actions/post-comments/PostComments'
+import PostDeleteButton from '@/components/ui/posts/post-item/post-actions/PostDeleteButton'
 
-const PostItem: FC<{ post: IPost }> = ({ post }) => {
+const PostItem: FC<{ post: IPost, refetchPosts: any }> = ({ post, refetchPosts }) => {
 	const commentsQuery = useQuery(
 		['get comment', post._id],
 		() => CommentService.getByPostId(post._id),
@@ -34,6 +35,8 @@ const PostItem: FC<{ post: IPost }> = ({ post }) => {
 			/>
 
 			{isOpenComment && <PostComments commentsQuery={commentsQuery} postId={post._id} />}
+
+			<PostDeleteButton postId={post._id} refetch={refetchPosts} />
 		</Card>
 	)
 }

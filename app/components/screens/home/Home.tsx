@@ -6,7 +6,7 @@ import { useQuery } from 'react-query'
 import { PostService } from '@services/post.service'
 
 const Home: FC = () => {
-	const { data, isLoading } = useQuery(
+	const { data, isLoading, refetch } = useQuery(
 		'get all posts',
 		() => PostService.getAll(),
 		{
@@ -17,8 +17,12 @@ const Home: FC = () => {
 	return (
 		<Layout title="Головна">
 			<div>
-				<AddPost />
-				<Posts posts={data || []} isLoading={isLoading} />
+				<AddPost refetch={refetch} />
+				<Posts
+					posts={data || []}
+					isLoading={isLoading}
+					refetchPosts={refetch}
+				/>
 			</div>
 		</Layout>
 	)
