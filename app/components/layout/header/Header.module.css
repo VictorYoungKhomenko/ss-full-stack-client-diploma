@@ -17,6 +17,8 @@
 
 .header .wrapper {
     position: relative;
+    display: flex;
+    align-items: center;
     width: calc(75% - 16px);
     padding-left: 16px;
     border-radius: 30px;
@@ -27,19 +29,17 @@
     width: 100%;
     border: none;
     outline: none;
+    padding: 5px;
     background-color: transparent;
-    color: black;
     font-size: 16px;
     text-align: center;
+    color: black;
 }
 
 .header .wrapper > input::placeholder {
-    background-color: #607d9f;
+    transition: color 0.2s ease-in-out;
 }
 
-.header .wrapper > svg {
-    position: absolute;
-    top: 3px;
-    left: 46%;
-    fill: #607d9f !important;
+.header .wrapper > input.active::placeholder {
+    color: transparent;
 }
