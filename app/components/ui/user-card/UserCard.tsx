@@ -9,13 +9,16 @@ const UserCard: FC<{ user: IUser }> = ({ user }) => {
 
 	return (
 		<Card className={styles.card}>
-			<Avatar src={user.avatarPath} alt={user.name} />
-			<Typography.Text>
-				<b>user.name</b>
-			</Typography.Text>
-			<Button type="dashed" onClick={() => push(`/profile/${user._id}`)}>
-				Перейти у профіль
-			</Button>
+			<Avatar src={user.avatarPath} alt={user.name} size={100} />
+			<div style={{ marginTop: 5 }}>
+				<Typography.Title level={4}>{user.name}</Typography.Title>
+			</div>
+
+			<div>
+				<Button type="dashed" onClick={() => push(`/profile/${user._id}`)}>
+					Перейти у профіль
+				</Button>
+			</div>
 		</Card>
 	)
 }

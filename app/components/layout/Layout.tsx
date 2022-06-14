@@ -20,17 +20,19 @@ const Layout: FC<PropsWithChildren<{ title: string }>> = ({
 
 			<Header />
 
-			<Row gutter={[20, 30]} className={styles.row}>
-				{user && (
-					<Col span={4}>
-						<Sidebar />
-					</Col>
-				)}
+			<div style={{ paddingLeft: 10, paddingRight: 10 }}>
+				<Row gutter={[20, 30]} className={styles.row}>
+					{user && (
+						<Col span={4}>
+							<Sidebar />
+						</Col>
+					)}
 
-				<Col span={user ? 20 : 24}>
-					<div>{children}</div>
-				</Col>
-			</Row>
+					<Col span={user ? 20 : 24}>
+						<div>{children}</div>
+					</Col>
+				</Row>
+			</div>
 		</>
 	)
 }

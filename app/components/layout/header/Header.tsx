@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import styles from './Header.module.css'
+import styles from './Header.module.scss'
 import logoImg from './logo.png'
 import Search from '@/components/layout/header/Search/Search'
 
