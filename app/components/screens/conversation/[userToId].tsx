@@ -1,10 +1,11 @@
 import { FC } from 'react'
 import Layout from '@/components/layout/Layout'
+import { Card } from 'antd'
 
 const ConversationPage: FC = () => {
 	return (
 		<Layout title="Діалог">
-			<div>Conversation</div>
+			<Card bordered={false} bodyStyle={{ padding: '30px 0' }} />
 		</Layout>
 	)
 }

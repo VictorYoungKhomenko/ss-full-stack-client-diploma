@@ -9,7 +9,7 @@ import { PictureOutlined } from '@ant-design/icons'
 import UploadField from '@/components/ui/upload-field/UploadField'
 import { IMediaResponse } from '@services/media.service'
 
-const AddPost: FC<{ refetch: any }> = ({ refetch }) => {
+const AddPost: FC<{ refetch: any, col?: 1 | 2 }> = ({ refetch, col = 1 }) => {
 	const [content, setContent] = useState('')
 	const [image, setImage] = useState<IMediaResponse>({} as IMediaResponse)
 	const { user } = useAuth()
@@ -36,16 +36,16 @@ const AddPost: FC<{ refetch: any }> = ({ refetch }) => {
 		<>
 			{error && <Alert message={errorCatch(error)} type='error' showIcon />}
 			<Card
-				style={{
+				style={col === 1 ? {
 					marginTop: 15
-				}}
+				} : {}}
 				className={styles.item}
 			>
 				{isLoading ? (
 					<Skeleton />
 				) : (
 					<Row gutter={[15, 15]}>
-						<Col span={1}>
+						<Col span={col}>
 							<UploadField
 								onChange={setImage}
 								Button={
@@ -56,7 +56,7 @@ const AddPost: FC<{ refetch: any }> = ({ refetch }) => {
 							/>
 						</Col>
 
-						<Col span={23}>
+						<Col span={col == 1 ? 23 : 22}>
 							<Input
 								placeholder='Розкажи, що в тебе нового'
 								onKeyPress={addPostHandler}
