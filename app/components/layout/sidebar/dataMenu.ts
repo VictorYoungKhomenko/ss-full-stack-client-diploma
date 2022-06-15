@@ -1,16 +1,24 @@
 import { IMenuItem } from '@/types/menu.interface'
+import {
+	FileTextOutlined,
+	HomeOutlined,
+	ProfileOutlined
+} from '@ant-design/icons'
 
 export const menu: IMenuItem[] = [
 	{
-		title: 'Моя страница',
-		link: '/profile'
+		title: 'Моя сторінка',
+		link: '/profile',
+		icon: HomeOutlined
 	},
 	{
-		title: 'Друзья',
-		link: '/friends'
+		title: 'Друзі',
+		link: '/friends',
+		icon: ProfileOutlined
 	},
 	{
-		title: 'Новости',
-		link: '/'
+		title: 'Новини',
+		link: '/',
+		icon: FileTextOutlined
 	}
 ]

@@ -4,6 +4,7 @@ import { Col, Row } from 'antd'
 import Header from '@/components/layout/header/Header'
 import Sidebar from '@/components/layout/sidebar/Sidebar'
 import Head from 'next/head'
+import styles from './Layout.module.scss'
 
 const Layout: FC<PropsWithChildren<{ title: string }>> = ({
 	children,
@@ -19,17 +20,19 @@ const Layout: FC<PropsWithChildren<{ title: string }>> = ({
 
 			<Header />
 
-			<Row gutter={[5, 2]}>
-				{user && (
-					<Col span={6}>
-						<Sidebar />
-					</Col>
-				)}
+			<div style={{ paddingLeft: 10, paddingRight: 10 }}>
+				<Row gutter={[20, 30]} className={styles.row}>
+					{user && (
+						<Col span={4}>
+							<Sidebar />
+						</Col>
+					)}
 
-				<Col span={user ? 18 : 24}>
-					<div>{children}</div>
-				</Col>
-			</Row>
+					<Col span={user ? 20 : 24}>
+						<div>{children}</div>
+					</Col>
+				</Row>
+			</div>
 		</>
 	)
 }

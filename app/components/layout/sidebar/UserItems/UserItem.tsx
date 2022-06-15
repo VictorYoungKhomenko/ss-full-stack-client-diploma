@@ -16,30 +16,16 @@ const UserItem: FC<{ user: IUser }> = ({ user }) => {
 				color: '#111'
 			}}
 		>
-			<a>
+			<a style={{ display: 'flex', alignItems: 'center', marginTop: '0.5rem' }}>
 				<div
 					style={{
 						position: 'relative',
 						width: 50,
 						height: 50,
-						marginRight: 2
+						marginRight: 5
 					}}
 				>
-					<Avatar src={user.avatar} size={46} />
-					{user.isInNetwork && (
-						<div
-							style={{
-								position: 'absolute',
-								bottom: 0,
-								right: 0,
-								width: 12,
-								height: 12,
-								border: '2px solid #F1F7FA',
-								borderRadius: '50%',
-								backgroundColor: '#4FB14F'
-							}}
-						/>
-					)}
+					<Avatar src={user.avatarPath} size={46} />
 				</div>
 				<span style={{ fontSize: 14 }}>{user.name}</span>
 			</a>

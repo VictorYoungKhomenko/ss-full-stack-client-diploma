@@ -8,12 +8,12 @@ export const axiosClassic = axios.create({
 	headers: getContentType()
 })
 
-const instance = axios.create({
+export const axiosAuth = axios.create({
 	baseURL: API_URL,
 	headers: getContentType()
 })
 
-instance.interceptors.request.use(config => {
+axiosAuth.interceptors.request.use(config => {
 	const accessToken = Cookies.get('accessToken')
 
 	if (config.headers && accessToken)
@@ -21,5 +21,3 @@ instance.interceptors.request.use(config => {
 
 	return config
 })
-
-export default instance

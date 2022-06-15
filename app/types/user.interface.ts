@@ -5,10 +5,21 @@ export interface IUser {
 	isInNetwork?: boolean
 	isVerified?: boolean
 	location: string
+	university?: string
 	avatarPath?: string
-	groupNumber?: number
+	groupNumber?: string | number
 	haveStudentsDebt?: boolean
 	gender?: string
 	speciality?: string
 	friends?: IUser[]
+	postsCount?: number
+}
+
+export interface IUserFields {
+	name: string
+	location: string
+	avatarPath: string
+	speciality: string
+	university: string
+	groupNumber: number
 }
