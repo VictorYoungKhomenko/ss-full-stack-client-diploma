@@ -1,14 +1,16 @@
 import { useQuery } from 'react-query'
 import { UserService } from '@services/user.service'
+import { AxiosResponse } from 'axios'
+import { IUser } from '@/types/user.interface'
 
-export const useProfile = () => {
-	const { isLoading, data } = useQuery(
+export const useProfile = (successCallback?: (data: AxiosResponse<IUser, any>) => void) => {
+	const { isLoading, data, refetch } = useQuery(
 		'get profile',
 		() => UserService.getProfile(),
-		{
-			select: ({ data }) => data
-		}
+		successCallback ? {
+			onSuccess: successCallback
+		} : {}
 	)
 
-	return { isLoading, data }
+	return { isLoading, data: data?.data, refetch }
 }

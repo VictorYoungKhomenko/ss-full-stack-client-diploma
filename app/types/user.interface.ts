@@ -14,3 +14,12 @@ export interface IUser {
 	friends?: IUser[]
 	postsCount?: number
 }
+
+export interface IUserFields {
+	name: string
+	location: string
+	avatarPath: string
+	speciality: string
+	university: string
+	groupNumber: number
+}

@@ -27,6 +27,7 @@ export const useSearch = () => {
 
 	return {
 		handleSearch,
+		setSearchTerm,
 		isLoading,
 		data,
 		searchTerm,

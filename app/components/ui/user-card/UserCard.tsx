@@ -4,7 +4,10 @@ import { IUser } from '@/types/user.interface'
 import { Avatar, Button, Card, Typography } from 'antd'
 import { useRouter } from 'next/router'
 
-const UserCard: FC<{ user: IUser }> = ({ user }) => {
+const UserCard: FC<{ user: IUser; hideResult?: () => void }> = ({
+	user,
+	hideResult
+}) => {
 	const { push } = useRouter()
 
 	return (
@@ -15,7 +18,10 @@ const UserCard: FC<{ user: IUser }> = ({ user }) => {
 			</div>
 
 			<div>
-				<Button type="dashed" onClick={() => push(`/profile/${user._id}`)}>
+				<Button
+					type="dashed"
+					onClick={() => push(`/profile/${user._id}`).then(hideResult)}
+				>
 					Перейти у профіль
 				</Button>
 			</div>

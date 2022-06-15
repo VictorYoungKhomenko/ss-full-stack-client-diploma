@@ -4,7 +4,7 @@
     cursor: pointer;
 
     > input {
-      display: none;
+      display: none !important;
     }
   }
 }

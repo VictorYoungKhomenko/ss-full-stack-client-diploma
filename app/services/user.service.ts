@@ -1,5 +1,5 @@
 import { axiosAuth, axiosClassic } from '../api/interceptors'
-import { IUser } from '@/types/user.interface'
+import { IUser, IUserFields } from '@/types/user.interface'
 
 export const UserService = {
 	async findUsers(searchTerm: string) {
@@ -14,8 +14,8 @@ export const UserService = {
 		return axiosAuth.get<IUser>(`/user/profile`)
 	},
 
-	async updateProfile() {
-		return axiosAuth.put<IUser>('/user/profile')
+	async updateProfile(body: IUserFields) {
+		return axiosAuth.put<IUser>('/user/profile', body)
 	},
 
 	async toggleFriend(friendId: string) {

@@ -3,11 +3,24 @@ import { IUser } from '@/types/user.interface'
 import Image from 'next/image'
 import { Button, Card } from 'antd'
 import { useAuth } from '@/hooks/useAuth'
+import { useProfile } from '@/hooks/useProfile'
+import { UserService } from '@services/user.service'
+import { useMutation } from 'react-query'
 
 const ProfileAvatar: FC<{ profile: IUser }> = ({ profile }) => {
 	const { user } = useAuth()
 
 	const isMyProfile = user?._id === profile._id
+
+	const { data, refetch } = useProfile()
+
+	const isExistsFriend = data?.friends?.some(friend => friend._id === profile._id)
+
+	const { mutate } = useMutation('toggle friend', () => UserService.toggleFriend(profile._id), {
+		onSuccess: async () => {
+			await refetch()
+		}
+	})
 
 	return (
 		<Card style={{ textAlign: 'center' }}>
@@ -22,12 +35,21 @@ const ProfileAvatar: FC<{ profile: IUser }> = ({ profile }) => {
 				/>
 			)}
 
-			<Button type='primary' style={{ width: '100% ' }} disabled={isMyProfile}>
-				Написати повідомлення
+			<Button
+				type='dashed'
+				style={{ width: '100% ', marginTop: 20 }}
+				disabled={isMyProfile}
+				onClick={() => mutate()}
+			>
+				{isExistsFriend ? 'Видалити з друзів' : 'Додати у друзі'}
 			</Button>
 
-			<Button type='dashed' style={{ width: '100% ' }} disabled={isMyProfile}>
-				Додати у друзі
+			<Button
+				type='primary'
+				style={{ width: '100%' }}
+				disabled={isMyProfile}
+			>
+				Написати повідомлення
 			</Button>
 		</Card>
 	)

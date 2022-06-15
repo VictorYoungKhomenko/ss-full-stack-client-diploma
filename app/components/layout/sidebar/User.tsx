@@ -5,19 +5,22 @@ import { AuthService } from '@services/auth/auth.service'
 import styles from './Sidebar.module.scss'
 import ListItem from '@/components/layout/sidebar/ListItem'
 import { EditOutlined } from '@ant-design/icons'
+import { useProfile } from '@/hooks/useProfile'
 
 const User: FC = () => {
-	const { user, setUser } = useAuth()
+	const { setUser } = useAuth()
+
+	const { data } = useProfile()
 
 	return (
 		<Card className={styles.card}>
 			<Row gutter={[5, 5]}>
 				<Col span={5}>
-					<Avatar src={user?.avatarPath} alt='' size={'large'} />
+					<Avatar src={data?.avatarPath} alt='' size={'large'} />
 				</Col>
 
 				<Col span={19} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-					<p>{user?.name}</p>
+					<p>{data?.name}</p>
 				</Col>
 			</Row>
 
