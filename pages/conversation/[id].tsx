@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
-import UserToId from '@/components/screens/conversation/[userToId]'
+import Conversation from '@/components/screens/conversation/Conversation'
 
 const ConversationPage: NextPage = () => {
-	return <UserToId />
+	return <Conversation />
 }
 
 export default ConversationPage

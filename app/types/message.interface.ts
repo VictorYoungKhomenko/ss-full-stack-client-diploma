@@ -10,7 +10,13 @@ export interface IMessage {
 export interface IMessageFields {
 	text: string
 	userToId: string
+	userFromId: string
 	conversationId: string
+}
+
+export interface IDeleteMessageFields
+	extends Pick<IMessageFields, 'conversationId'> {
+	messageId: string
 }
 
 export interface IConversation {

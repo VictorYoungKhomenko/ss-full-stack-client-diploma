@@ -6,6 +6,8 @@ import { useAuth } from '@/hooks/useAuth'
 import { useProfile } from '@/hooks/useProfile'
 import { UserService } from '@services/user.service'
 import { useMutation } from 'react-query'
+import { ConversationService } from '@services/conversation.service'
+import { useRouter } from 'next/router'
 
 const ProfileAvatar: FC<{ profile: IUser }> = ({ profile }) => {
 	const { user } = useAuth()
@@ -21,6 +23,16 @@ const ProfileAvatar: FC<{ profile: IUser }> = ({ profile }) => {
 			await refetch()
 		}
 	})
+
+	const { push } = useRouter()
+
+	const { mutate: createConversation } = useMutation('create conversation',
+		() => ConversationService.create(profile._id),
+		{
+			onSuccess: async ({ data }) => {
+				await push(`/conversation/${data?._id}?with=${profile._id}`)
+			}
+		})
 
 	return (
 		<Card style={{ textAlign: 'center' }}>
@@ -48,6 +60,7 @@ const ProfileAvatar: FC<{ profile: IUser }> = ({ profile }) => {
 				type='primary'
 				style={{ width: '100%' }}
 				disabled={isMyProfile}
+				onClick={() => createConversation()}
 			>
 				Написати повідомлення
 			</Button>
