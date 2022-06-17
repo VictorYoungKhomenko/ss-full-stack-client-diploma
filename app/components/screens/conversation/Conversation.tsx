@@ -1,6 +1,6 @@
 import { FC, KeyboardEvent, useState } from 'react'
 import Layout from '@/components/layout/Layout'
-import { Avatar, Button, Card, Input, List } from 'antd'
+import { Alert, Avatar, Button, Card, Input, List } from 'antd'
 import { useRouter } from 'next/router'
 import UserInfo from '@/components/ui/posts/post-item/UserInfo'
 import { useProfileById } from '@/hooks/useProfileById'
@@ -19,7 +19,7 @@ const Conversation: FC = () => {
 
 	const conversationId = query?.id
 
-	const { conversation, sendMessage, removeMessage } = useChat(conversationId)
+	const { conversation, sendMessage, removeMessage, isConnected } = useChat(conversationId)
 
 	// const {
 	// 	isLoading: isLoadingConversation,
@@ -63,6 +63,8 @@ const Conversation: FC = () => {
 					<UserInfo user={userTo || {} as IUser} />
 				</Card>
 
+				{isConnected ? <Alert type='success' message='Підключено' /> : <Alert type='error' message='Не підключено' />}
+
 				<Card
 					id='scrollableDiv'
 					style={{
@@ -76,7 +78,7 @@ const Conversation: FC = () => {
 							<List.Item
 								key={item._id}
 								className={styles.item}
-								style={!isCurrentUserMessage(item, String(user?._id)) ? {
+								style={isCurrentUserMessage(item, String(user?._id)) ? {
 									justifyContent: 'flex-end'
 								} : {}
 								}
@@ -86,12 +88,12 @@ const Conversation: FC = () => {
 									title={<a href='#'>{item.userFrom.name}</a>}
 									description={item.text}
 									className={cn(styles.message, {
-										[styles.current]: !isCurrentUserMessage(item, String(user?._id))
+										[styles.current]: isCurrentUserMessage(item, String(user?._id))
 									})}
 								/>
 
 								{
-									!isCurrentUserMessage(item, String(user?._id)) && <Button
+									isCurrentUserMessage(item, String(user?._id)) && <Button
 										type='text'
 										style={{ position: 'absolute', top: 10, right: 47, opacity: 0.5 }}
 										title='Видалити повідомлення'

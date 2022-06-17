@@ -1,11 +1,9 @@
 import { FC } from 'react'
 import { useRouter } from 'next/router'
-import { Card, List, Skeleton } from 'antd'
+import { Card, Skeleton, Typography } from 'antd'
 import { useProfile } from '@/hooks/useProfile'
 import UserItem from '@/components/layout/sidebar/UserItems/UserItem'
 import styles from '../Sidebar.module.scss'
-import ListItem from '@/components/layout/sidebar/ListItem'
-import { MessageOutlined } from '@ant-design/icons'
 
 const UserItems: FC = () => {
 	const { push } = useRouter()
@@ -14,17 +12,12 @@ const UserItems: FC = () => {
 
 	return (
 		<Card className={styles.card}>
+			<Typography.Title level={5} style={{ marginBottom: 15 }}>
+				Мої друзі
+			</Typography.Title>
 			{isLoading ? <Skeleton /> : data?.friends?.length ? data?.friends?.map(user => (
 				<UserItem key={user._id} user={user} />
 			)) : <div> Друзів не має</div>}
-
-			<List>
-				<ListItem item={{
-					title: 'Повідомлення',
-					icon: MessageOutlined,
-					link: '/conversations'
-				}} />
-			</List>
 		</Card>
 	)
 }

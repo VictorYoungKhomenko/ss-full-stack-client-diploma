@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Avatar } from 'antd'
 import { time2TimeAgo } from '../../../../utilities/convertData'
 import { IUser } from '@/types/user.interface'
+import { CheckCircleTwoTone, DislikeFilled, LikeFilled } from '@ant-design/icons'
 
 const UserInfo: FC<{ user: IUser, postDate?: string }> = ({ user, postDate }) => {
 	return (
@@ -28,7 +29,21 @@ const UserInfo: FC<{ user: IUser, postDate?: string }> = ({ user, postDate }) =>
 					<Avatar size={46} src={user?.avatarPath} />
 				</div>
 				<div>
-					<p style={{ fontSize: 14 }}>{user.name}</p>
+					<p style={{ fontSize: 14 }}>
+						{user.name}
+
+						{
+							user?.haveStudentsDebt ?
+								<DislikeFilled style={{ color: '#f0262a', opacity: '0.5', marginLeft: 5 }} />
+								:
+								<LikeFilled style={{ color: '#1cff9d', opacity: '0.5', marginLeft: 5 }} />
+						}
+
+						{
+							user?.isVerified &&
+							<CheckCircleTwoTone style={{ color: '#5B9CE', opacity: '0.5', marginLeft: 5 }} />
+						}
+					</p>
 
 					{
 						postDate && <p style={{ fontSize: 14, opacity: '0.6' }}>{time2TimeAgo(postDate)}</p>

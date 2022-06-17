@@ -9,6 +9,7 @@ export interface IUser {
 	university?: string
 	avatarPath?: string
 	groupNumber?: string | number
+	debtCount?: number
 	haveStudentsDebt?: boolean
 	gender?: string
 	speciality?: string

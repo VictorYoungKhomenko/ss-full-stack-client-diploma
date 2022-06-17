@@ -39,7 +39,7 @@ const Search: FC = () => {
 					) : data?.length ?
 						(data.map(user => <UserCard user={user} key={user._id} hideResult={hideResult} />)
 						) : (
-							<div>Результатів немає!</div>
+							<div style={{ textAlign: 'center' }}>Результатів немає!</div>
 						)}
 				</Card>
 			)}

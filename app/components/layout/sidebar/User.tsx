@@ -4,7 +4,7 @@ import { Avatar, Button, Card, Col, List, Row } from 'antd'
 import { AuthService } from '@services/auth/auth.service'
 import styles from './Sidebar.module.scss'
 import ListItem from '@/components/layout/sidebar/ListItem'
-import { EditOutlined } from '@ant-design/icons'
+import { CheckCircleTwoTone, DislikeFilled, EditOutlined, LikeFilled } from '@ant-design/icons'
 import { useProfile } from '@/hooks/useProfile'
 
 const User: FC = () => {
@@ -19,8 +19,19 @@ const User: FC = () => {
 					<Avatar src={data?.avatarPath} alt='' size={'large'} />
 				</Col>
 
-				<Col span={19} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-					<p>{data?.name}</p>
+				<Col span={19} style={{ display: 'flex', alignItems: 'center' }}>
+					<p>{data?.name}
+						{
+							data?.haveStudentsDebt ?
+								<DislikeFilled style={{ color: '#f0262a', opacity: '0.5', marginLeft: 5 }} />
+								:
+								<LikeFilled style={{ color: '#1cff9d', opacity: '0.5', marginLeft: 5 }} />
+						}
+
+						{data?.isVerified && (
+							<CheckCircleTwoTone style={{ color: '#5B9CE', opacity: '0.5', marginLeft: 5 }} />
+						)}
+					</p>
 				</Col>
 			</Row>
 

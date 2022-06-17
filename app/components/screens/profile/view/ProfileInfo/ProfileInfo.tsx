@@ -8,7 +8,9 @@ import CountItem from '@/components/screens/profile/view/ProfileInfo/CountItem'
 const ProfileInfo: FC<{ profile: IUser }> = ({ profile }) => {
 	return (
 		<Card style={{ textAlign: 'center' }}>
-			<Typography.Title level={1}>{profile.name}</Typography.Title>
+			<Typography.Title level={1}>
+				{profile.name}
+			</Typography.Title>
 
 			<div style={{ marginBottom: 25 }}>
 				<InfoItem name={'Місце проживання'} value={profile.location} />
@@ -26,6 +28,11 @@ const ProfileInfo: FC<{ profile: IUser }> = ({ profile }) => {
 				<CountItem
 					number={profile.postsCount}
 					title={numWord(profile.postsCount || 0, ['пост', 'поста', 'постів'])}
+				/>
+
+				<CountItem
+					number={profile.debtCount}
+					title={numWord(profile.debtCount || 0, ['борг', 'борги', 'боргів'])}
 				/>
 			</Row>
 		</Card>

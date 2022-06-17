@@ -13,7 +13,7 @@ const InfoItem: FC<IInfoItem> = ({ name, value }) => {
 				<Col span={12}>
 					<b>{name}:</b>
 				</Col>
-				<Col span={12}>{value ? value : 'Не має даних'}</Col>
+				<Col span={12}>{value ? value : 'Немає даних'}</Col>
 			</Row>
 		</div>
 	)

@@ -10,6 +10,8 @@ export const useChat = (conversationId?: string | string[]) => {
 		{} as IConversation
 	)
 
+	const [isConnected, setIsConnected] = useState(false)
+
 	const [socket, setSocket] = useState<Socket<DefaultEventsMap,
 		DefaultEventsMap> | null>(null)
 
@@ -33,7 +35,7 @@ export const useChat = (conversationId?: string | string[]) => {
 
 	useEffect(
 		() => {
-			if (!socket || !conversationId) return
+			if (!socket) return
 
 			socket.emit('message:get', { conversationId })
 
@@ -41,7 +43,23 @@ export const useChat = (conversationId?: string | string[]) => {
 				setConversation(conversation)
 			})
 
+			socket.on('connect', () => {
+				socket.emit('joinRoom', { conversationId })
+			})
+
+			socket.on('joinedRoom', () => {
+				setIsConnected(true)
+			})
+
+			socket.on('leftRoom', () => {
+				setIsConnected(false)
+			})
+
 			return () => {
+				socket.on('connect', () => {
+					socket.emit('leaveRoom', { conversationId })
+				})
+
 				socket.disconnect()
 			}
 		},
@@ -56,5 +74,5 @@ export const useChat = (conversationId?: string | string[]) => {
 		socket?.emit('message:delete', body)
 	}
 
-	return { conversation, sendMessage, removeMessage }
+	return { conversation, sendMessage, removeMessage, isConnected, setIsConnected }
 }
