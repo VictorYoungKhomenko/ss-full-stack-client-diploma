@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css'
-import '../app/assets/styles/globals.css'
+import '@/assets/styles/globals.scss'
 import type { AppProps } from 'next/app'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import AuthProvider from '@providers/AuthProvider'

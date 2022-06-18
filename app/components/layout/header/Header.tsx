@@ -1,23 +1,29 @@
-import { FC, useState } from 'react'
-import styles from './Header.module.css'
+import { FC } from 'react'
+import styles from './Header.module.scss'
+import Search from '@/components/layout/header/Search/Search'
+import logoImg from './image.png'
+import Link from 'next/link'
+import { useAuth } from '@/hooks/useAuth'
+import cn from 'classnames'
 
 const Header: FC = () => {
-	const [isSearchActive, setIsSearchActive] = useState(false)
+	const { user } = useAuth()
 
 	return (
-		<header className={styles.header}>
-			{/*<div className={styles['image-wrapper']}>*/}
-			{/*	/!* eslint-disable-next-line @next/next/on-img/element *!/*/}
-			{/*	<img src={logoImg.src} />*/}
-			{/*</div>*/}
-			{/*<div className={styles.wrapper}>*/}
-			{/*	<input*/}
-			{/*		type="text"*/}
-			{/*		placeholder="Пошук"*/}
-			{/*		onClick={() => setIsSearchActive(true)}*/}
-			{/*	/>*/}
-			{/*</div>*/}
-			HEADER
+		<header
+			className={cn(styles.header, {
+				[styles.center]: !user
+			})}
+		>
+			<div className={styles['image-wrapper']}>
+				{/* eslint-disable-next-line @next/next/on-img/element */}
+				<Link href={'/'} passHref>
+					<a href="/">
+						<img src={logoImg.src} className={styles['header__image']} />
+					</a>
+				</Link>
+			</div>
+			{user && <Search />}
 		</header>
 	)
 }

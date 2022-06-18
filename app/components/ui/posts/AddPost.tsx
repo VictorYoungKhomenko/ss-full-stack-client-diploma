@@ -1,34 +1,77 @@
 import { FC, KeyboardEvent, useState } from 'react'
 import { useAuth } from '@/hooks/useAuth'
-import { Alert, Card, Input } from 'antd'
+import { Alert, Card, Col, Image, Input, Row, Skeleton } from 'antd'
+import { useMutation } from 'react-query'
+import { PostService } from '@services/post.service'
+import { errorCatch } from '../../../api/api.utils'
+import styles from './Post.module.scss'
+import { PictureOutlined } from '@ant-design/icons'
+import UploadField from '@/components/ui/upload-field/UploadField'
+import { IMediaResponse } from '@services/media.service'
 
-const error = ''
-
-const AddPost: FC = () => {
+const AddPost: FC<{ refetch: any, col?: 1 | 2 }> = ({ refetch, col = 1 }) => {
 	const [content, setContent] = useState('')
+	const [image, setImage] = useState<IMediaResponse>({} as IMediaResponse)
 	const { user } = useAuth()
+
+	const { mutateAsync, isLoading, error } = useMutation(
+		'add Post',
+		() => PostService.create({ content, image: image.url }),
+		{
+			onSuccess() {
+				refetch()
+				setImage({} as IMediaResponse)
+				setContent('')
+			}
+		}
+	)
 
 	const addPostHandler = async (e: KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter' && user) {
-			setContent('')
+			await mutateAsync()
 		}
 	}
 
 	return (
 		<>
-			{error && <Alert message={error} type="error" showIcon />}
+			{error && <Alert message={errorCatch(error)} type='error' showIcon />}
 			<Card
-				bodyStyle={{
-					borderRadius: '10px'
-				}}
+				style={col === 1 ? {
+					marginTop: 15
+				} : {}}
+				className={styles.item}
 			>
-				<Input
-					placeholder="Розкажи, що в тебе нового"
-					style={{ borderRadius: '10px' }}
-					onKeyPress={addPostHandler}
-					onChange={e => setContent(e.target.value)}
-					value={content}
-				/>
+				{isLoading ? (
+					<Skeleton />
+				) : (
+					<Row gutter={[15, 15]}>
+						<Col span={col}>
+							<UploadField
+								onChange={setImage}
+								Button={
+									<div className='ant-btn ant-btn-dashed'>
+										<PictureOutlined />
+									</div>
+								}
+							/>
+						</Col>
+
+						<Col span={col == 1 ? 23 : 22}>
+							<Input
+								placeholder='Розкажи, що в тебе нового'
+								onKeyPress={addPostHandler}
+								onChange={e => setContent(e.target.value)}
+								value={content}
+							/>
+						</Col>
+					</Row>
+				)}
+
+				{image?.url && (
+					<div style={{ marginTop: 20 }}>
+						<Image src={image.url} alt={image.name} width={200} />
+					</div>
+				)}
 			</Card>
 		</>
 	)

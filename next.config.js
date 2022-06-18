@@ -8,7 +8,15 @@ const nextConfig = {
 		GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID
 	},
 	images: {
-		domains: ['localhost']
+		domains: [
+			'localhost',
+			'lh3.googleusercontent.com',
+			'media.pitchfork.com',
+			'upload.wikimedia.org',
+			'partycity.scene7.com',
+			'play-lh.googleusercontent.com',
+			'encrypted-tbn0.gstatic.com'
+		]
 	},
 	async rewrites() {
 		return [

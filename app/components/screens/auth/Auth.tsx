@@ -21,6 +21,28 @@ const Auth: FC = () => {
 
 	return (
 		<Layout title="Вхід у систему">
+			<Card style={{ border: 'none', marginTop: '3rem' }}>
+				<Typography.Title style={{ textAlign: 'center' }}>
+					Ласкаво просимо до Students Social!
+				</Typography.Title>
+
+				<p
+					style={{
+						maxWidth: '25%',
+						textAlign: 'center',
+						marginTop: '1rem',
+						marginLeft: 'auto',
+						marginRight: 'auto'
+					}}
+				>
+					<b>
+						<i>Students social - </i>
+					</b>{' '}
+					місце, що допомагає тримати зв'язок з одногрупниками, студентами інших
+					груп, інших спеціальностей та навіть інших навчальних закладів
+				</p>
+			</Card>
+
 			<Card className={styles.authWrapper}>
 				<Typography.Title>Вхід у систему</Typography.Title>
 
