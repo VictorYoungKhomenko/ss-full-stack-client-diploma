@@ -6,6 +6,7 @@ import { IUser } from '@/types/user.interface'
 import { CheckCircleTwoTone, DislikeFilled, LikeFilled } from '@ant-design/icons'
 
 const UserInfo: FC<{ user: IUser, postDate?: string }> = ({ user, postDate }) => {
+
 	return (
 		<Link href={`/profile/${user._id}`}>
 			<a

@@ -21,16 +21,6 @@ const Conversation: FC = () => {
 
 	const { conversation, sendMessage, removeMessage, isConnected } = useChat(conversationId)
 
-	// const {
-	// 	isLoading: isLoadingConversation,
-	// 	data
-	// } = useQuery(['get conversation', conversationId],
-	// 	() => ConversationService.get(String(conversationId)),
-	// 	{
-	// 		select: ({ data }) => data,
-	// 		enabled: !!conversationId
-	// 	})
-
 	const [message, setMessage] = useState('')
 
 	const { user } = useAuth()

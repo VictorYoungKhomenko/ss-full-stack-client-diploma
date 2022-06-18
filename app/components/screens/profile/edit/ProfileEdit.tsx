@@ -13,6 +13,8 @@ import { useProfile } from '@/hooks/useProfile'
 const ProfileEdit: FC = () => {
 	const [image, setImage] = useState<IMediaResponse>({} as IMediaResponse)
 
+	const [isNameEmpty, setIsNameEmpty] = useState(false)
+
 	const { isLoading, data, refetch } = useProfile(({ data }) => {
 		setImage({
 			name: 'default',
@@ -47,7 +49,6 @@ const ProfileEdit: FC = () => {
 		<Layout title='Редагування профіля'>
 			<Card bordered={false} bodyStyle={{ padding: '30px 0' }}>
 				<Typography.Title level={1}>Редагування профіля</Typography.Title>
-
 				{
 					isLoading ? (
 						<Skeleton />
@@ -65,18 +66,12 @@ const ProfileEdit: FC = () => {
 								label={`Ім'я`}
 								rules={[{ required: true, message: `Будь ласка введіть ім'я!` }]}
 							>
-								<Input placeholder={`Введіть ім'я`} />
+								<Input placeholder={`Введіть ім'я`} onChange={e => setIsNameEmpty(!e.target.value)} />
 							</Form.Item>
 
 							<Form.Item
 								name={'location'}
 								label='Місце проживання'
-								rules={[
-									{
-										required: true,
-										message: `Будь ласка введіть місце проживання!`
-									}
-								]}
 							>
 								<Input placeholder={`Введіть місце проживання`} />
 							</Form.Item>
@@ -84,12 +79,6 @@ const ProfileEdit: FC = () => {
 							<Form.Item
 								name={'speciality'}
 								label='Спеціальність'
-								rules={[
-									{
-										required: true,
-										message: `Будь ласка введіть назву спеціальності`
-									}
-								]}
 							>
 								<Input placeholder={`Введіть назву спеціальності`} />
 							</Form.Item>
@@ -97,12 +86,6 @@ const ProfileEdit: FC = () => {
 							<Form.Item
 								name={'university'}
 								label='Навчальний заклад'
-								rules={[
-									{
-										required: true,
-										message: `Будь ласка введіть вищого навчального закладу!`
-									}
-								]}
 							>
 								<Input placeholder={`Введіть назву вищого навчального закладу`} />
 							</Form.Item>
@@ -110,12 +93,7 @@ const ProfileEdit: FC = () => {
 							<Form.Item
 								name={'groupNumber'}
 								label='Номер групи'
-								rules={[
-									{
-										required: true,
-										message: `Будь ласка введіть номер групи!`
-									}
-								]}>
+							>
 								<InputNumber />
 							</Form.Item>
 
@@ -147,7 +125,7 @@ const ProfileEdit: FC = () => {
 							</Form.Item>
 
 							<Form.Item>
-								<Button htmlType={'submit'}>Оновити дані профіля</Button>
+								<Button htmlType={'submit'} disabled={isNameEmpty}>Оновити дані профіля</Button>
 							</Form.Item>
 						</Form>
 					)

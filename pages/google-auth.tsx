@@ -18,7 +18,7 @@ const GoogleAuthPage: NextPage = () => {
 		{
 			async onSuccess(user) {
 				notification.success({
-					message: 'Auth success'
+					message: 'Авторизація пройшла успішно! '
 				})
 				setUser && setUser(user)
 				await push('/')

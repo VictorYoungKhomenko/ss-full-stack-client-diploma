@@ -14,7 +14,8 @@ const nextConfig = {
 			'media.pitchfork.com',
 			'upload.wikimedia.org',
 			'partycity.scene7.com',
-			'play-lh.googleusercontent.com'
+			'play-lh.googleusercontent.com',
+			'encrypted-tbn0.gstatic.com'
 		]
 	},
 	async rewrites() {

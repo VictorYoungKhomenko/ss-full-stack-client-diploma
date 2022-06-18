@@ -2,8 +2,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #9aa352;
+  background-color: #ad779a;
   padding: 1.2rem 1.2rem 0.6rem;
+
+  &.center {
+    justify-content: center;
+
+    .image-wrapper {
+      text-align: center;
+    }
+  }
 }
 
 .header .image-wrapper {

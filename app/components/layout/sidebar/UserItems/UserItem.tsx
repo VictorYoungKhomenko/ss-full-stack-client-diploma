@@ -5,8 +5,6 @@ import { Avatar } from 'antd'
 import { CheckCircleTwoTone, DislikeFilled, LikeFilled } from '@ant-design/icons'
 
 const UserItem: FC<{ user: IUser }> = ({ user }) => {
-	console.log(user)
-
 	return (
 		<Link
 			key={user._id}
